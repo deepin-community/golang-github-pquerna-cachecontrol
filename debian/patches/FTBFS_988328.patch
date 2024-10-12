@@ -1,0 +1,22 @@
+From 0923c70de240c513ff98174aa10a783bdcf0560e Mon Sep 17 00:00:00 2001
+From: Paul Querna <pquerna@apache.org>
+Date: Thu, 17 May 2018 09:25:54 -0700
+Subject: [PATCH] Explicit cast of MaxInt64 to int64.  Fixes #12
+
+---
+ cacheobject/directive_test.go | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/cacheobject/directive_test.go b/cacheobject/directive_test.go
+index 4076a98..f420fec 100644
+--- a/cacheobject/directive_test.go
++++ b/cacheobject/directive_test.go
+@@ -280,7 +280,7 @@ func TestParseDeltaSecondsLarge(t *testing.T) {
+ }
+ 
+ func TestParseDeltaSecondsVeryLarge(t *testing.T) {
+-	ds, err := parseDeltaSeconds(fmt.Sprintf("%d", math.MaxInt64))
++	ds, err := parseDeltaSeconds(fmt.Sprintf("%d", int64(math.MaxInt64)))
+ 	require.NoError(t, err)
+ 	require.Equal(t, ds, DeltaSeconds(math.MaxInt32))
+ }
